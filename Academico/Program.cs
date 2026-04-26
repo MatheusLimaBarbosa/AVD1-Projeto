@@ -1,7 +1,12 @@
+using Academico.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// 🔥 Registro do Repository (ESSENCIAL)
+builder.Services.AddSingleton<IAlunoRepository, InMemoryAlunoRepository>();
 
 var app = builder.Build();
 
@@ -9,7 +14,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -20,10 +24,10 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+// 🔥 Rota padrão ajustada para abrir direto em Aluno
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Contact}/{id?}")
+    pattern: "{controller=Aluno}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
