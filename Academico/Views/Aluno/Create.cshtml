@@ -1,0 +1,73 @@
+﻿@model Academico.Models.Aluno
+
+@{
+    ViewData["Title"] = "Cadastrar Aluno";
+}
+
+<h2>Cadastrar Aluno</h2>
+
+<div class="container mt-4 p-4 border" style="border: 1px solid black;">
+    <form asp-action="Create" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input asp-for="Nome" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Telefone</label>
+            <input asp-for="Telefone" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Endereço</label>
+            <input asp-for="Endereco" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Complemento</label>
+            <input asp-for="Complemento" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Bairro</label>
+            <input asp-for="Bairro" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Município</label>
+            <input asp-for="Municipio" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">UF</label>
+            <select asp-for="Uf" class="form-control">
+                <option selected value="">[Selecione o estado]</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+            </select>
+        </div>
+
+        <div class="mb-3">      
+            <label class="form-label">CEP</label>
+            <input asp-for="Cep" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Gravar</button>
+        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+
+    </form>
+</div>

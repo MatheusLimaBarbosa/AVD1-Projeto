@@ -5,7 +5,7 @@ namespace Academico.Models
     public class Aluno
     {
         [Key]
-        public int AlunoId { get; set; }
+        public int AlunoID { get; set; }
 
         [Required]
         [StringLength(100)]
