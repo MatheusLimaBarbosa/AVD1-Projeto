@@ -1,0 +1,77 @@
+﻿@model Academico.Models.Professor
+
+@{
+    ViewData["Title"] = "Excluir Professor";
+}
+
+<h1>Excluir Professor</h1>
+
+<h3 class="text-danger">
+    Tem certeza que deseja excluir este professor?
+</h3>
+
+<hr />
+
+<div>
+
+    <dl class="row">
+
+        <dt class="col-sm-3">
+            Nome
+        </dt>
+
+        <dd class="col-sm-9">
+            @Model.Nome
+        </dd>
+
+        <dt class="col-sm-3">
+            Data de Nascimento
+        </dt>
+
+        <dd class="col-sm-9">
+            @Model.DataNascimento.ToString("dd/MM/yyyy")
+        </dd>
+
+        <dt class="col-sm-3">
+            Titulação
+        </dt>
+
+        <dd class="col-sm-9">
+            @Model.Titulacao
+        </dd>
+
+        <dt class="col-sm-3">
+            Município
+        </dt>
+
+        <dd class="col-sm-9">
+            @Model.Municipio
+        </dd>
+
+        <dt class="col-sm-3">
+            UF
+        </dt>
+
+        <dd class="col-sm-9">
+            @Model.Uf
+        </dd>
+
+    </dl>
+
+</div>
+
+<form asp-action="Delete">
+
+    <input type="hidden"
+           asp-for="ProfessorID" />
+
+    <input type="submit"
+           value="Excluir"
+           class="btn btn-danger" />
+
+    <a asp-action="Index"
+           class="btn btn-primary">
+        Voltar
+    </a>
+
+</form>

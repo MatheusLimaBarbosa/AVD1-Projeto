@@ -26,7 +26,9 @@
 
         <div class="mb-3">
             <label class="form-label">Endereço</label>
-            <input asp-for="Endereco" class="form-control" />
+            <input asp-for="Endereco"
+                   id="endereco"
+                   class="form-control" />
         </div>
 
         <div class="mb-3">
@@ -36,18 +38,27 @@
 
         <div class="mb-3">
             <label class="form-label">Bairro</label>
-            <input asp-for="Bairro" class="form-control" />
+            <input asp-for="Bairro"
+                   id="bairro"
+                   class="form-control" />
         </div>
 
         <div class="mb-3">
             <label class="form-label">Município</label>
-            <input asp-for="Municipio" class="form-control" />
+            <input asp-for="Municipio"
+                   id="municipio"
+                   class="form-control" />
         </div>
 
         <div class="mb-3">
             <label class="form-label">UF</label>
-            <select asp-for="Uf" class="form-control">
+
+            <select asp-for="Uf"
+                    id="uf"
+                    class="form-control">
+
                 <option selected value="">[Selecione o estado]</option>
+
                 <option value="AC">Acre</option>
                 <option value="AL">Alagoas</option>
                 <option value="AP">Amapá</option>
@@ -58,16 +69,64 @@
                 <option value="ES">Espírito Santo</option>
                 <option value="GO">Goiás</option>
                 <option value="MA">Maranhão</option>
+
             </select>
         </div>
 
-        <div class="mb-3">      
+        <div class="mb-3">
             <label class="form-label">CEP</label>
-            <input asp-for="Cep" class="form-control" />
+
+            <input asp-for="Cep"
+                   id="cep"
+                   class="form-control" />
         </div>
 
-        <button type="submit" class="btn btn-success">Gravar</button>
-        <a asp-action="Index" class="btn btn-primary">Voltar</a>
+        <button type="submit" class="btn btn-success">
+            Gravar
+        </button>
+
+        <a asp-action="Index"
+               class="btn btn-primary">
+            Voltar
+        </a>
 
     </form>
 </div>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.getElementById("cep")
+            .addEventListener("blur", async function () {
+
+            let cep = this.value.replace(/\D/g, '');
+
+            if (cep.length === 8) {
+
+                let response =
+                    await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+                let data = await response.json();
+
+                if (!data.erro) {
+
+                    document.getElementById("endereco").value =
+                        data.logradouro;
+
+                    document.getElementById("bairro").value =
+                        data.bairro;
+
+                    document.getElementById("municipio").value =
+                        data.localidade;
+
+                    document.getElementById("uf").value =
+                        data.uf;
+                }
+            }
+        });
+    </script>
+}
